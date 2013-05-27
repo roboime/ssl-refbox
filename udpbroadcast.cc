@@ -22,6 +22,18 @@
 #include <sys/types.h>
 #endif
 
+/* Mac OS X does not know the MSG_NOSIGNAL flag; therefore we "link"
+ * MSG_NOSIGNAL to SO_NOSIGPIPE.
+ * (If there's an error with sending data, the application crashes at send(),
+ * rather than returning -1. That's the default behaviour (FSM knows why), so to
+ * avoid that, the flag is required.)
+ *
+ * TODO see if Linux would also get along with SO_NOSIGPIPE
+ */
+#ifndef MSG_NOSIGNAL
+#define MSG_NOSIGNAL SO_NOSIGPIPE
+#endif
+
 namespace {
 	class InterfaceList;
 
