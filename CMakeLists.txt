@@ -11,7 +11,7 @@ include_directories(${PROTOBUF_INCLUDE_DIRS})
 
 set(CMAKE_CXX_FLAGS "-std=c++11")
 
-set(src .)
+set(src ${CMAKE_SOURCE_DIR}/src)
 
 set(SOURCES
     ${src}/addrinfolist.cc
@@ -57,7 +57,7 @@ set(PROTOS
 protobuf_generate_cpp(PROTO_SOURCES PROTO_HEADERS ${PROTOS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-file(COPY ${CMAKE_SOURCE_DIR}/referee.conf DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY ${src}/referee.conf DESTINATION ${CMAKE_BINARY_DIR})
 
 set(APPNAME sslrefbox)
 add_executable(${APPNAME} WIN32 ${SOURCES} ${HEADERS} ${PROTO_SOURCES} ${PROTO_HEADERS})
