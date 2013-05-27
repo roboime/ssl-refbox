@@ -1,4 +1,5 @@
-build/
+build*/
+*.user
 client/testclient
 scoreboard/scoreboard
 *.o
