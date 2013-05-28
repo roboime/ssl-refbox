@@ -62,3 +62,13 @@ file(COPY ${src}/referee.conf DESTINATION ${CMAKE_BINARY_DIR})
 set(APPNAME sslrefbox)
 add_executable(${APPNAME} WIN32 ${SOURCES} ${HEADERS} ${PROTO_SOURCES} ${PROTO_HEADERS})
 target_link_libraries(${APPNAME} ${GTKMM_LIBRARIES} ${PROTOBUF_LIBRARIES})
+
+option(BUILD_SCOREBOARD "Also build scoreboard along with the refbox?" ON)
+if(BUILD_SCOREBOARD)
+    add_subdirectory(src/scoreboard)
+endif()
+
+option(BUILD_TESTCLIENT "Also build testclient along with the refbox?" ON)
+if(BUILD_TESTCLIENT)
+    add_subdirectory(src/client)
+endif()
