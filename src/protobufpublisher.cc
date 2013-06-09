@@ -16,13 +16,10 @@ void ProtobufPublisher::publish(SaveState &state) {
 	state.mutable_referee()->set_packet_timestamp(diff.count());
 
 	// Serialize the packet.
-	std::string packet;
-	{
-		google::protobuf::io::StringOutputStream sos(&packet);
-		state.referee().SerializeToZeroCopyStream(&sos);
-	}
+	std::stringstream stream;
+	state.referee().SerializeToOstream(&stream);
+	std::string packet = stream.str();
 
 	// Send the packet.
 	bcast.send(packet.data(), packet.size());
 }
-
