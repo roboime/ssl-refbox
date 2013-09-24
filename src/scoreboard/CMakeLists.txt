@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8.2)
 
+find_package(Threads)
 find_package(PkgConfig)
 pkg_check_modules(GTKMM gtkmm-2.4)
 include_directories(${GTKMM_INCLUDE_DIRS})
@@ -45,4 +46,4 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set(APPNAME scoreboard)
 add_executable(${APPNAME} WIN32 ${SOURCES} ${HEADERS} ${PROTO_SOURCES} ${PROTO_HEADERS})
-target_link_libraries(${APPNAME} ${GTKMM_LIBRARIES} ${PROTOBUF_LIBRARIES})
+target_link_libraries(${APPNAME} ${GTKMM_LIBRARIES} ${PROTOBUF_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
